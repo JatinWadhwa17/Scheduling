@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS Scheduling Algorithms</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        nav {
+            background-color: #34495e;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 1em;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #3498db;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .algorithm {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            border: 1px solid #bdc3c7;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .algorithm:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .code {
+            font-family: 'Courier New', monospace;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+
+        .history {
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em;
+            background-color: #2c3e50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><marquee>OS Scheduling Algorithms</marquee></h1>
+    </header>
+
+    <nav>
+        <a href="#fcfs">FCFS</a>
+        <a href="#round-robin">Round Robin</a>
+        <a href="#sjf">Shortest Job First (SJF)</a>
+        <a href="#priority">Priority Scheduling</a>
+    </nav>
+
+    <section id="fcfs">
+        <div class="algorithm">
+            <h2>First-Come, First-Served (FCFS)</h2>
+            <p>
+                First Come First Serve CPU Scheduling Algorithm, shortly known as FCFS, is the simplest scheduling algorithm. In FCFS, the process that arrives first is the one that gets executed first. It follows the First In First Out (FIFO) principle.
+            </p>
+            <div class="code">
+                <!-- FCFS Pseudocode -->
+                <pre>
+                    ProcessQueue = [P1, P2, P3, ..., Pn]
+                    for each process in ProcessQueue:
+                        execute process
+                </pre>
+            </div>
+            <div class="history">
+                <h3>History</h3>
+                <p>
+                    FCFS is one of the earliest scheduling algorithms and has been used since the early days of computing. It is easy to understand and implement, but it may not always be the most efficient in terms of turnaround time and waiting time.
+                </p>
+                <h3>Advantages</h3>
+                <ul>
+                    <li>Simple and easy to understand.</li>
+                    <li>Implementation is straightforward.</li>
+                </ul>
+                <h3>Disadvantages</h3>
+                <ul>
+                    <li>May result in poor turnaround and waiting times.</li>
+                    <li>Not suitable for time-sensitive tasks.</li>
+                </ul>
+                <h3>Working</h3>
+                <p>
+                    Processes are executed in the order they arrive in the ready queue. The first process to arrive is the first to be executed. This continues until all processes are completed.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="round-robin">
+        <div class="algorithm">
+            <h2>Round Robin</h2>
+            <p>
+                Round Robin is a preemptive scheduling algorithm where each process is assigned a fixed time slot in a cyclic way. It ensures fair distribution of CPU time among all processes.
+            </p>
+            <div class="code">
+                <!-- Round Robin Pseudocode -->
+                <pre>
+                    ProcessQueue = [P1, P2, P3, ..., Pn]
+                    while there are processes in ProcessQueue:
+                        execute each process for a fixed time (time quantum)
+                        move the process to the end of the queue
+                </pre>
+            </div>
+            <div class="history">
+                <h3>History</h3>
+                <p>
+                    Round Robin was introduced to address the limitations of FCFS in time-sharing systems. It has been a widely used algorithm in operating systems with its fairness in resource allocation.
+                </p>
+                <h3>Advantages</h3>
+                <ul>
+                    <li>Fair distribution of CPU time among processes.</li>
+                    <li>Prevents starvation of processes.</li>
+                </ul>
+                <h3>Disadvantages</h3>
+                <ul>
+                    <li>May lead to high turnaround time for long processes.</li>
+                    <li>Overhead of context switching.</li>
+                </ul>
+                <h3>Working</h3>
+                <p>
+                    Each process is assigned a fixed time slice (time quantum). The scheduler runs through each process in a cyclic manner, executing each for the defined time slice. The process is then moved to the end of the queue, and the cycle continues until all processes are completed.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="sjf">
+        <div class="algorithm">
+            <h2>Shortest Job First (SJF)</h2>
+            <p>
+                SJF selects the process with the shortest total burst time first. It can be preemptive or non-preemptive. Non-preemptive SJF is also known as Shortest Job Next (SJN) or Shortest Job First (SJF).
+            </p>
+            <div class="code">
+                <!-- SJF Pseudocode -->
+                <pre>
+                    ProcessQueue = [P1, P2, P3, ..., Pn]
+                    sort ProcessQueue based on burst time
+                    for each process in ProcessQueue:
+                        execute process
+                </pre>
+            </div>
+            <div class="history">
+                <h3>History</h3>
+                <p>
+                    SJF has its roots in the earliest computer scheduling algorithms. It aims to minimize the waiting time of processes and improve system throughput.
+                </p>
+                <h3>Advantages</h3>
+                <ul>
+                    <li>Minimizes waiting time for processes.</li>
+                    <li>Improves system throughput.</li>
+                </ul>
+                <h3>Disadvantages</h3>
+                <ul>
+                    <li>May lead to starvation of long processes.</li>
+                    <li>Requires knowledge of burst times, which may not always be available.</li>
+                </ul>
+                <h3>Working</h3>
+                <p>
+                    The process with the shortest burst time is selected for execution first. If two processes have the same burst time, FCFS is used as a tiebreaker. This continues until all processes are completed.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="priority">
+        <div class="algorithm">
+            <h2>Priority Scheduling</h2>
+            <p>
+                Priority Scheduling selects processes for execution based on their priority. The process with the highest priority is selected first. It can be preemptive or non-preemptive.
+            </p>
+            <div class="code">
+                <!-- Priority Scheduling Pseudocode -->
+                <pre>
+                    ProcessQueue = [P1, P2, P3, ..., Pn]
+                    sort ProcessQueue based on priority
+                    for each process in ProcessQueue:
+                        execute process
+                </pre>
+            </div>
+            <div class="history">
+                <h3>History</h3>
+                <p>
+                    Priority Scheduling is a concept that has been present in various forms since the early days of computing. It allows the system to prioritize critical tasks.
+                </p>
+                <h3>Advantages</h3>
+                <ul>
+                    <li>Allows prioritization of critical tasks.</li>
+                    <li>Flexible and can be adapted to different scenarios.</li>
+                </ul>
+                <h3>Disadvantages</h3>
+                <ul>
+                    <li>May lead to starvation of low-priority processes.</li>
+                    <li>Implementation complexity increases with the number of priority levels.</li>
+                </ul>
+                <h3>Working</h3>
+                <p>
+                    Processes are scheduled for execution based on their priority. The process with the highest priority is selected first. In case of equal priorities, FCFS may be used as a tiebreaker. This continues until all processes are completed.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2023 OS Scheduling Algorithms</p>
+    </footer>
+
+</body>
+</html>
